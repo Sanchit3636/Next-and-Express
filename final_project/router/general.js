@@ -40,9 +40,9 @@ public_users.get("/", async (req, res) => {
 });
 
 // Get book details based on ISBN
-public_users.get("/isbn/:isbn", function (req, res) {
+public_users.get("/isbn/:isbn", async (req, res) => {
   const targetISBN = parseInt(req.params.isbn);
-  const targetBook = books[targetISBN];
+  const targetBook = await books[targetISBN];
   if (!targetBook) {
     return res.status(404).json({ message: "ISBN not found." });
   } else {
@@ -51,9 +51,9 @@ public_users.get("/isbn/:isbn", function (req, res) {
 });
 
 // Get book details based on author
-public_users.get("/author/:author", function (req, res) {
+public_users.get("/author/:author", async (req, res) => {
   // get array of matching book objects
-  const matchingBooks = Object.values(books).filter(
+  const matchingBooks = Object.values(await books).filter(
     (book) => book.author.toLowerCase() === req.params.author.toLowerCase()
   );
   if (matchingBooks.length > 0) {
@@ -64,8 +64,8 @@ public_users.get("/author/:author", function (req, res) {
 });
 
 // Get all books based on title
-public_users.get("/title/:title", function (req, res) {
-  const matchingTitle = Object.values(books).filter(
+public_users.get("/title/:title", async (req, res) => {
+  const matchingTitle = Object.values(await books).filter(
     (book) => book.title.toLowerCase() === req.params.title.toLowerCase()
   )[0];
   if (matchingTitle) {
