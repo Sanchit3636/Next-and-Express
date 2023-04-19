@@ -17,7 +17,7 @@ const authenticatedUser = (username, password) => {
   );
 };
 
-//only registered users can login
+// /customer/login
 regd_users.post("/login", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
@@ -36,8 +36,24 @@ regd_users.post("/login", (req, res) => {
 });
 
 // Add a book review
+// /customer/auth/:isbn
 regd_users.put("/auth/review/:isbn", (req, res) => {
-  /* Hint: You have to give a review as a request query & it must get posted with the username (stored in the session) posted. If the same user posts a different review on the same ISBN, it should modify the existing review. If another user logs in and posts a review on the same ISBN, it will get added as a different review under the same ISBN. */
+  const user = req.session.authorization.username;
+  const review = req.body.review; // string
+  const isbn = req.params.isbn;
+  if (!review) {
+    res.status(400).json({ message: "Review is empty!" });
+  } else {
+    books[isbn].reviews[user] = review;
+    res.status(200).json({ message: "Book review updated." });
+  }
+});
+
+// delete a review
+regd_users.delete("/auth/review/:isbn", (req, res) => {
+  // filter reviews based on session username.
+  // then delete those reviews.
+  res.status(200).json({ message: "Book review deleted." });
 });
 
 module.exports.authenticated = regd_users;
