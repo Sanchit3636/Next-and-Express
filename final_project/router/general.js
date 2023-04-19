@@ -44,10 +44,10 @@ public_users.get("/isbn/:isbn", function (req, res) {
 public_users.get("/author/:author", function (req, res) {
   // get array of matching book objects
   const matchingBooks = Object.values(books).filter(
-    (book) => book.author === req.params.author
+    (book) => book.author.toLowerCase() === req.params.author.toLowerCase()
   );
   if (matchingBooks.length > 0) {
-    return res.status(200).send(JSON.stringify({ matchingBooks }, null, 4));
+    return res.status(200).send(JSON.stringify(matchingBooks, null, 4));
   } else {
     return res.status(404).json({ message: "No books by that author." });
   }
@@ -56,7 +56,7 @@ public_users.get("/author/:author", function (req, res) {
 // Get all books based on title
 public_users.get("/title/:title", function (req, res) {
   const matchingTitle = Object.values(books).filter(
-    (book) => book.title === req.params.title
+    (book) => book.title.toLowerCase() === req.params.title.toLowerCase()
   )[0];
   if (matchingTitle) {
     return res.status(200).json(matchingTitle);
