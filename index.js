@@ -34,9 +34,9 @@ app.use("/customer/auth/*", function auth(req, res, next) {
   }
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 1337;
 
 app.use("/customer", customer_routes);
 app.use("/", genl_routes);
 
-app.listen(PORT, () => console.log("Server is running."));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
