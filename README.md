@@ -1,6 +1,6 @@
 # Matt Stockinger's Selected Books API
 
-This is a public API that I created as a learning project. It allows RESTful access to basic information about some of my favorite books (title, author, ISBN). Once a user registers with the API through the /register endpoint, they can also post reviews to my favorite books.
+This is a public API that I created as a learning project. It allows RESTful access to basic information about some of my favorite books (title, author, ISBN). Once a user registers with the API through the /register endpoint, they can also post reviews to my favorite books. The API is currently hosted at [https://stock-books.azurewebsites.net](https://stock-books.azurewebsites.net). (You may need to be patient--the service plan is free tier.)
 
 ## General Endpoints - No login required
 
